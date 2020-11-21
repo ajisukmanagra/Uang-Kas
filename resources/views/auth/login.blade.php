@@ -31,13 +31,40 @@
         .form-input {
             margin: 40px;
         }
+
+        .container-fluid {
+            position: relative;
+            min-height: 100vh;
+        }
+
+        @media(max-width: 670px) {
+            body {
+                background-color: #8FA1FE;
+            }
+
+            .slider {
+                display: none;
+            }
+
+            .card {
+                margin: 70px 0 auto;
+                float: none;
+                margin-bottom: 20px;
+                border-radius: 10px;
+            }
+
+            .footer {
+                color: white;
+                bottom: 0;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6 bg-white">
+            <div class="col-sm-6 bg-white slider">
                 <h2 class="text-center">MASUK APLIKASI</h2>
                 <h5 class="text-center">Masuk ke aplikasi untuk memulai sesi!</h5>
                 <center>
@@ -81,7 +108,7 @@
             </div>
 
             <div class="col-12 mt-3">
-                <h6 class="text-center">WEB UANGKAS</h6>
+                <h6 class="text-center footer">WEB UANGKAS</h6>
             </div>
         </div>
     </div>

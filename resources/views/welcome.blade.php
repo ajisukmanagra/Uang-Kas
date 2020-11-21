@@ -55,6 +55,11 @@
             padding-right: 25px;
         }
 
+        .color-A0D198:active {
+            border: none;
+            background-color: none;
+        }
+
         .color-A0D198:hover span:after {
             opacity: 1;
             right: 0;
@@ -87,10 +92,35 @@
         .text-content {
             color: white;
             margin-left: 10px;
+            margin-top: 5px;
         }
 
         .footer {
             padding: 20px;
+        }
+
+        @media(max-width: 670px) {
+            h3 {
+                font-size: 20px;
+            }
+
+            h5 {
+                font-size: 14px;
+            }
+
+            .text {
+                font-size: 24px;
+            }
+
+            .icon {
+                width: 42px;
+                margin-right: 8px;
+            }
+
+            .text-content {
+                margin-top: 5px;
+            }
+
         }
     </style>
 </head>
@@ -127,7 +157,7 @@
                 <h2 class="text">FITUR SEDERHANA</h2>
                 <div class="card-content row">
                     <div class="col-2">
-                        <img src="{{ asset('img/home/icon/1.png') }}">
+                        <img class="icon" src="{{ asset('img/home/icon/1.png') }}">
                     </div>
                     <div class="col-10">
                         <h5 class="text-content">Mengelola Uang Kas secara digital.</h5>
@@ -136,7 +166,7 @@
 
                 <div class="card-content row">
                     <div class="col-2">
-                        <img src="{{ asset('img/home/icon/2.png') }}">
+                        <img class="icon" src="{{ asset('img/home/icon/2.png') }}">
                     </div>
                     <div class="col-10">
                         <h5 class="text-content">Melihat Laporan Uang Kas masuk/keluar.</h5>
@@ -145,7 +175,7 @@
 
                 <div class="card-content row mb-5">
                     <div class="col-2">
-                        <img src="{{ asset('img/home/icon/3.png') }}">
+                        <img class="icon" src="{{ asset('img/home/icon/3.png') }}">
                     </div>
                     <div class="col-10">
                         <h5 class="text-content">Mengelola siswa perkelas oleh Bendahara.</h5>
