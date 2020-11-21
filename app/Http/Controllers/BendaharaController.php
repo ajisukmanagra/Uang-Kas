@@ -9,6 +9,7 @@ use App\Riwayat;
 use App\Pesan;
 use App\KasMasuk;
 use App\KasKeluar;
+use App\Multimedia;
 use Carbon\Carbon;
 use Auth;
 use Image;
@@ -33,7 +34,9 @@ class BendaharaController extends Controller
             ->where('users_id', Auth::user()->id)
             ->sum('bayar');
 
-        return view('user/index', compact('masuk', 'keluar'));
+        $multimedia = Multimedia::get();
+
+        return view('user/index', compact('masuk', 'keluar', 'multimedia'));
     }
 
     // Setting Akun

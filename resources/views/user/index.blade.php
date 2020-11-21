@@ -111,6 +111,22 @@
                 </div>
             </div>
         </div>
+
+        <div class="info">
+            <div class="card shadow">
+                <div class="card-body">
+                    <span class="fa fa-video"></span> &nbsp; Multimedia
+                    <hr>
+                    <div class="info-data mt-3">
+                        <div class="video">
+                            @foreach($multimedia as $m)
+                            <iframe src="https://www.youtube.com/embed/{{ $m->video }}" width="100%"></iframe>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="container-bottom">
@@ -123,6 +139,16 @@
 
 @section('css')
 <style>
+    .video {
+        overflow: auto;
+        white-space: nowrap;
+    }
+
+    .video iframe {
+        display: inline-block;
+        margin-right: 20px;
+    }
+
     .container-bottom {
         margin-top: 20px;
     }
@@ -247,7 +273,6 @@
             font-size: 14px;
         }
     }
-
 </style>
 @endsection
 
@@ -262,6 +287,5 @@
         document.getElementById("menit").innerHTML = tanggal.getMinutes();
         document.getElementById("detik").innerHTML = tanggal.getSeconds();
     }
-
 </script>
 @endsection

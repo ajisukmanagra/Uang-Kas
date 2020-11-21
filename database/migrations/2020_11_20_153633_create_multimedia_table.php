@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRiwayatTable extends Migration
+class CreateMultimediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateRiwayatTable extends Migration
      */
     public function up()
     {
-        Schema::create('riwayat', function (Blueprint $table) {
+        Schema::create('multimedia', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->integer('users_id')->unsigned()->nullable();
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->string('riwayat');
+            $table->string('judul');
+            $table->string('video');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateRiwayatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('riwayat');
+        Schema::dropIfExists('multimedia');
     }
 }

@@ -59,6 +59,11 @@ Route::get('/admin/pembayaran/keluar/cetak_pdf/{id}', 'AdminController@cetak_pem
 Route::get('/admin/pesan', 'AdminController@pesan')->middleware('admin');
 Route::put('/admin/pesan/{id}', 'AdminController@pesan_read')->middleware('admin');
 
+// Rute Multimedia
+Route::get('/admin/multimedia', 'AdminController@multimedia_index')->middleware('admin');
+Route::post('/admin/multimedia/store', 'AdminController@multimedia_store')->middleware('admin');
+Route::get('/admin/multimedia/delete/{id}', 'AdminController@multimedia_delete')->middleware('admin');
+
 // =============================================================================================================== //
 
 // Rute Bendahara Home

@@ -14,13 +14,14 @@ class CreateKasMasukTable extends Migration
     public function up()
     {
         Schema::create('kas_masuk', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
 
-            $table->unsignedBigInteger('siswa_id')->nullable();
+            $table->integer('siswa_id')->unsigned()->nullable();
             $table->foreign('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
 
-            $table->unsignedBigInteger('users_id')->nullable();
+            $table->integer('users_id')->unsigned()->nullable();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->integer('bayar');
             $table->timestamps();
         });

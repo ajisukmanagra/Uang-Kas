@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Multimedia;
 use Illuminate\Http\Request;
 use App\User;
 use App\Siswa;
@@ -332,5 +333,30 @@ class AdminController extends Controller
         ]);
 
         return redirect('/admin/pesan');
+    }
+
+    public function multimedia_index()
+    {
+        $multimedia = Multimedia::get();
+        return view('admin/multimedia/index', compact('multimedia'));
+    }
+
+    public function multimedia_store(Request $request)
+    {
+        $video = $request->get('video');
+        $exp = explode("=", $video);
+
+        Multimedia::create([
+            'judul' => $request->get('judul'),
+            'video' => $exp[1],
+        ]);
+
+        return redirect('/admin/multimedia');
+    }
+
+    public function multimedia_delete($id)
+    {
+        Multimedia::find($id)->delete();
+        return redirect('/admin/multimedia');
     }
 }

@@ -156,12 +156,12 @@
                             <span>Pesan</span>
                         </a>
                     </li>
-                    <!-- <li class="@yield('pengaturan-akun')">
-                        <a href="/admin/akun">
-                            <i class="material-icons">settings</i>
-                            <span>Pengaturan Akun</span>
+                    <li class="@yield('pesan')">
+                        <a href="/admin/multimedia">
+                            <i class="material-icons">videocam</i>
+                            <span>Multimedia</span>
                         </a>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
             <!-- #Menu -->

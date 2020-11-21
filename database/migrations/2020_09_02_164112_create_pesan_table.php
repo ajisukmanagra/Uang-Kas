@@ -14,9 +14,9 @@ class CreatePesanTable extends Migration
     public function up()
     {
         Schema::create('pesan', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
 
-            $table->unsignedBigInteger('users_id')->nullable();
+            $table->integer('users_id')->unsigned()->nullable();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->enum('status', ['true', 'false']);
