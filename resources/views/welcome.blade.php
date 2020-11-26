@@ -136,13 +136,19 @@
         </a>
     </nav>
 
+    <div class="">
+        <small></small>
+    </div>
+
     <div class="container-fluid mt-4">
         <h3 class="text-center">APLIKASI UANG KAS SEKOLAH BERBASIS WEB</h3>
         <div class="row content">
             <div class="col-sm-6">
-                <h5>Aplikasi Uang Kas adalah Aplikasi Pengelolaan Kas masuk dan Kas keluar untuk membantu dalam pengelolaan Uang Kas secara Digital.</h5>
+                <h5>Aplikasi Uang Kas adalah Aplikasi Pengelolaan Kas masuk dan Kas keluar untuk membantu dalam
+                    pengelolaan Uang Kas secara Digital.</h5>
                 <br>
-                <h5>Aplikasi Uang Kas ini membantu bendahara dalam hal mencatat setiap pemasukan dan pengeluaran uang yang terkumpul di sekolah per Kelas.</h5>
+                <h5>Aplikasi Uang Kas ini membantu bendahara dalam hal mencatat setiap pemasukan dan pengeluaran uang
+                    yang terkumpul di sekolah per Kelas.</h5>
             </div>
             <div class="col-sm-6">
                 <img src="{{ asset('img/home/bg-1.jpg') }}" width="100%">
