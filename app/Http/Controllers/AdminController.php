@@ -27,13 +27,11 @@ class AdminController extends Controller
     {
         $masuk = DB::table('kas_masuk')->sum('bayar');
         $keluar = DB::table('kas_keluar')->sum('bayar');
-        // $pesan = DB::table('pesan')->where('status', 'false')->get();
         $pesan = Pesan::count();
         $bendahara = User::where('level', 'bendahara')->count();
         $siswa = Siswa::count();
 
         return view('admin/index', compact('masuk', 'keluar', 'bendahara', 'pesan', 'siswa'));
-        // return $bendahara;
     }
 
     // Setting Akun

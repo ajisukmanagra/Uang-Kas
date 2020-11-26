@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 
 class LoginController extends Controller
 {
@@ -40,24 +42,36 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $input = $request->all();
 
-        $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required',
-        ]);
+        $message = [
+            'username.required' => 'Username dibutuhkan!',
+            'username.exists' => 'Username tidak terdaftar!',
+            'password.required' => 'Password dibutuhkan!',
+            'validation.required' => 'Username dan password dibutuhkan!',
+        ];
 
-        if(Auth()->attempt(array('username' => $input['username'], 'password' => $input['password']))) {
-            if(Auth()->user()->level == 'admin') {
+        $validatedData = $request->validate([
+            'username' => 'required|exists:users,username',
+            'password' => 'required',
+        ], $message);
+
+        if (Auth()->attempt(array('username' => $input['username'], 'password' => $input['password']))) {
+            if (Auth()->user()->level == 'admin') {
                 return redirect('/admin');
-            } else if(Auth()->user()->level == 'bendahara') {
+            } else if (Auth()->user()->level == 'bendahara') {
                 return redirect('/user');
             } else {
                 return redirect('/login');
             }
         } else {
-            return redirect()->route('login')->with('error', 'Username atau Password salah!');
+            return redirect()->back()
+                ->withInput()
+                ->withErrors([
+                    'password' => 'Password salah!',
+                ]);
         }
     }
 }

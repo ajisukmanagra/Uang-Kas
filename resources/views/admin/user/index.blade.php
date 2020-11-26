@@ -213,7 +213,7 @@
     $('.button-show').on('click', function() {
         $('#modal').modal('toggle');
         var id = $(this).attr('data-id');
-        var url = "/get_data_user/" + id;
+        var url = "/admin/get_data_user/" + id;
         $.ajax({
             url: url,
             cache: false,
@@ -233,7 +233,7 @@
     $('.button-edit').on('click', function() {
         $('modalEdit').modal('toggle');
         var id = $(this).attr('data-id');
-        var url = '/get_data_user/' + id;
+        var url = '/admin/get_data_user/' + id;
         $.ajax({
             '_token': "{{ csrf_token() }}",
             url: url,

@@ -81,24 +81,30 @@
                     <form action="{{ route('login') }}" method="POST" class="form-input">
                         @csrf
                         <div class="form-group">
-                            <input type="text" required name="username">
+                            <input type="text" name="username" value="{{ old('username') }}">
                             <label for="input" class="input-label">Username</label><i class="bar"></i>
                             @error('username')
-                            <span class="has-error">
+                            <span class="has-error text-danger">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <input type="password" required name="password">
+                            <input type="password" name="password">
                             <label for="input" class="input-label">Password</label><i class="bar"></i>
                             @error('password')
-                            <span class="has-error">
+                            <span class="has-error text-danger">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
+
+                        @error('validation.required')
+                        <span class="has-error text-danger">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
 
                         <div class="form-group">
                             <button class="btn btn-primary float-right">MASUK</button>

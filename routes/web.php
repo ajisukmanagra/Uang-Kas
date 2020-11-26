@@ -17,89 +17,97 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+]);
 
-// Rute Admin Home
-Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
+// Rute Admin with prefix and middleware
+Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
+    // Rute Admin Home
+    Route::get('/', 'AdminController@index')->name('admin');
 
-// Rute Setting Akun
-Route::get('/admin/akun', 'AdminController@setting_akun')->name('setting.akun')->middleware('admin');
-Route::put('/admin/akun/update/{id}', 'AdminController@update_akun')->name('update.akun')->middleware('admin');
-Route::put('/admin/akun/password/{id}', 'AdminController@update_password')->middleware('admin');
+    // Rute Setting Akun
+    Route::get('/akun', 'AdminController@setting_akun')->name('setting.akun');
+    Route::put('/akun/update/{id}', 'AdminController@update_akun')->name('update.akun');
+    Route::put('/akun/password/{id}', 'AdminController@update_password');
 
-// Rute User / Bendahara
-Route::get('/get_data_user/{id}', 'AdminController@get_data_user')->middleware('admin');
-Route::get('/admin/user', 'AdminController@user')->name('user')->middleware('admin');
-Route::get('/admin/user/show/{id}', 'AdminController@user_show')->name('user.show')->middleware('admin');
-Route::post('/admin/user/store', 'AdminController@user_store')->name('user.store')->middleware('admin');
-Route::put('/admin/user/update/{id}', 'AdminController@user_update')->name('user.update')->middleware('admin');
-Route::get('/admin/user/delete/{id}', 'AdminController@user_delete')->name('user.delete')->middleware('admin');
+    // Rute User / Bendahara
+    Route::get('/get_data_user/{id}', 'AdminController@get_data_user');
+    Route::get('', 'AdminController@user')->name('user');
+    Route::get('/show/{id}', 'AdminController@user_show')->name('user.show');
+    Route::post('/store', 'AdminController@user_store')->name('user.store');
+    Route::put('/update/{id}', 'AdminController@user_update')->name('user.update');
+    Route::get('/delete/{id}', 'AdminController@user_delete')->name('user.delete');
 
-// Rute Siswa
-// Route::get('/get_data_siswa/{id}', 'AdminController@get_data_siswa')->middleware('admin');
-Route::get('/admin/siswa', 'AdminController@siswa')->name('siswa')->middleware('admin');
-Route::get('/admin/siswa/{id}', 'AdminController@siswa_show')->name('siswa.show')->middleware('admin');
+    // Rute Siswa
+    // Route::get('/get_data_siswa/{id}', 'AdminController@get_data_siswa');
+    Route::get('/siswa', 'AdminController@siswa')->name('siswa');
+    Route::get('/siswa/{id}', 'AdminController@siswa_show')->name('siswa.show');
 
-// Rute Riwayat
-Route::get('/admin/riwayat', 'AdminController@riwayat')->middleware('admin');
-// Route::get('/admin/riwayat/delete_all', 'AdminController@riwayat_delete')->middleware('admin');
+    // Rute Riwayat
+    Route::get('/riwayat', 'AdminController@riwayat');
+    // Route::get('/riwayat/delete_all', 'AdminController@riwayat_delete');
 
-// Rute Pembayaran
-Route::get('/admin/pembayaran/masuk', 'AdminController@pembayaran_masuk')->middleware('admin');
-Route::get('/admin/pembayaran/masuk/{id}', 'AdminController@pembayaran_show_masuk')->middleware('admin');
-Route::get('/admin/kas/masuk/cetak_kas_masuk', 'AdminController@cetak_kas_masuk_all')->middleware('admin');
-Route::get('/admin/pembayaran/masuk/cetak_pdf/{id}', 'AdminController@cetak_pembayaran_masuk')->middleware('admin');
+    // Rute Pembayaran
+    Route::get('/pembayaran/masuk', 'AdminController@pembayaran_masuk');
+    Route::get('/pembayaran/masuk/{id}', 'AdminController@pembayaran_show_masuk');
+    Route::get('/kas/masuk/cetak_kas_masuk', 'AdminController@cetak_kas_masuk_all');
+    Route::get('/pembayaran/masuk/cetak_pdf/{id}', 'AdminController@cetak_pembayaran_masuk');
 
-Route::get('/admin/pembayaran/keluar', 'AdminController@pembayaran_keluar')->middleware('admin');
-Route::get('/admin/pembayaran/keluar/{id}', 'AdminController@pembayaran_show_keluar')->middleware('admin');
-Route::get('/admin/kas/keluar/cetak_kas_keluar', 'AdminController@cetak_kas_keluar_all')->middleware('admin');
-Route::get('/admin/pembayaran/keluar/cetak_pdf/{id}', 'AdminController@cetak_pembayaran_keluar')->middleware('admin');
+    Route::get('/pembayaran/keluar', 'AdminController@pembayaran_keluar');
+    Route::get('/pembayaran/keluar/{id}', 'AdminController@pembayaran_show_keluar');
+    Route::get('/kas/keluar/cetak_kas_keluar', 'AdminController@cetak_kas_keluar_all');
+    Route::get('/pembayaran/keluar/cetak_pdf/{id}', 'AdminController@cetak_pembayaran_keluar');
 
-// Rute Pesan
-Route::get('/admin/pesan', 'AdminController@pesan')->middleware('admin');
-Route::put('/admin/pesan/{id}', 'AdminController@pesan_read')->middleware('admin');
+    // Rute Pesan
+    Route::get('/pesan', 'AdminController@pesan');
+    Route::put('/pesan/{id}', 'AdminController@pesan_read');
 
-// Rute Multimedia
-Route::get('/admin/multimedia', 'AdminController@multimedia_index')->middleware('admin');
-Route::post('/admin/multimedia/store', 'AdminController@multimedia_store')->middleware('admin');
-Route::get('/admin/multimedia/delete/{id}', 'AdminController@multimedia_delete')->middleware('admin');
+    // Rute Multimedia
+    Route::get('/multimedia', 'AdminController@multimedia_index');
+    Route::post('/multimedia/store', 'AdminController@multimedia_store');
+    Route::get('/multimedia/delete/{id}', 'AdminController@multimedia_delete');
+});
 
-// =============================================================================================================== //
 
-// Rute Bendahara Home
-Route::get('/user', 'BendaharaController@index')->middleware('bendahara');
+// Rute user with prefix and middleware
+Route::group(['prefix' => 'user',  'middleware' => 'bendahara'], function () {
+    // Rute Bendahara Home
+    Route::get('/', 'BendaharaController@index');
 
-// Rute Setting Akun
-Route::get('/user/akun', 'BendaharaController@setting_akun')->name('setting.akun.user')->middleware('bendahara');
-Route::put('/user/akun/update/{id}', 'BendaharaController@update_akun')->name('update.akun.user')->middleware('bendahara');
+    // Rute Setting Akun
+    Route::get('/akun', 'BendaharaController@setting_akun')->name('setting.akun.user');
+    Route::put('/akun/update/{id}', 'BendaharaController@update_akun')->name('update.akun.user');
 
-// Rute Siswa
-Route::get('/user/siswa', 'BendaharaController@siswa')->middleware('bendahara');
-Route::post('/user/siswa/store', 'BendaharaController@siswa_store')->name('siswa.store')->middleware('bendahara');
-// Route::get('/user/siswa/delete/{id}', 'BendaharaController@siswa_delete')->middleware('bendahara');
+    // Rute Siswa
+    Route::get('/siswa', 'BendaharaController@siswa');
+    Route::post('/siswa/store', 'BendaharaController@siswa_store')->name('siswa.store');
+    // Route::get('/siswa/delete/{id}', 'BendaharaController@siswa_delete');
 
-// Rute Riwayat
-Route::get('/user/riwayat', 'BendaharaController@riwayat')->middleware('bendahara');
-Route::get('/user/riwayat/delete_all', 'BendaharaController@riwayat_delete')->middleware('bendahara');
+    // Rute Riwayat
+    Route::get('/riwayat', 'BendaharaController@riwayat');
+    // Route::get('/riwayat/delete_all', 'BendaharaController@riwayat_delete');
 
-// Rute Pembayaran
-Route::get('/user/pembayaran', 'BendaharaController@pembayaran')->middleware('bendahara');
-Route::get('/user/pembayaran/show/{nama}', 'BendaharaController@pembayaran_user')->middleware('bendahara');
-Route::post('/user/pembayaran/store', 'BendaharaController@pembayaran_store')->middleware('bendahara');
-Route::get('/user/pembayaran/delete/{id}', 'BendaharaController@pembayaran_delete')->middleware('bendahara');
+    // Rute Pembayaran
+    Route::get('/pembayaran', 'BendaharaController@pembayaran');
+    Route::get('/pembayaran/show/{nama}', 'BendaharaController@pembayaran_user');
+    Route::post('/pembayaran/store', 'BendaharaController@pembayaran_store');
+    Route::get('/pembayaran/delete/{id}', 'BendaharaController@pembayaran_delete');
 
-// Rute Bayar masuk & keluar
-Route::get('/user/pembayaran/masuk', 'BendaharaController@pembayaran_masuk')->middleware('bendahara');
-Route::get('/user/pembayaran/keluar', 'BendaharaController@pembayaran_keluar')->middleware('bendahara');
-Route::post('/user/pembayaran/keluar/store', 'BendaharaController@pembayaran_keluar_store')->middleware('bendahara');
-// Route::get('/user/pembayaran/delete/{id}', 'BendaharaController@pembayaran_keluar_delete')->middleware('bendahara');
+    // Rute Bayar masuk & keluar
+    Route::get('/pembayaran/masuk', 'BendaharaController@pembayaran_masuk');
+    Route::get('/pembayaran/keluar', 'BendaharaController@pembayaran_keluar');
+    Route::post('/pembayaran/keluar/store', 'BendaharaController@pembayaran_keluar_store');
+    // Route::get('/pembayaran/delete/{id}', 'BendaharaController@pembayaran_keluar_delete');
 
-// Rute Cetak PDF
-Route::get('/user/pembayaran/kas-masuk/cetak_pdf', 'BendaharaController@cetak_kas_masuk')->middleware('bendahara');
-Route::get('/user/pembayaran/kas-keluar/cetak_pdf', 'BendaharaController@cetak_kas_keluar')->middleware('bendahara');
-Route::get('/user/pembayaran/{id}/kas-masuk-siswa/cetak_pdf', 'BendaharaController@cetak_kas_masuk_siswa')->middleware('bendahara');
+    // Rute Cetak PDF
+    Route::get('/pembayaran/kas-masuk/cetak_pdf', 'BendaharaController@cetak_kas_masuk');
+    Route::get('/pembayaran/kas-keluar/cetak_pdf', 'BendaharaController@cetak_kas_keluar');
+    Route::get('/pembayaran/{id}/kas-masuk-siswa/cetak_pdf', 'BendaharaController@cetak_kas_masuk_siswa');
 
-// Rute Pesan
-Route::get('/user/pesan', 'BendaharaController@pesan')->middleware('bendahara');
-Route::get('/user/pesan/create', 'BendaharaController@pesan_create')->middleware('bendahara');
-Route::post('/user/pesan/store', 'BendaharaController@pesan_store')->middleware('bendahara');
+    // Rute Pesan
+    Route::get('/pesan', 'BendaharaController@pesan');
+    Route::get('/pesan/create', 'BendaharaController@pesan_create');
+    Route::post('/pesan/store', 'BendaharaController@pesan_store');
+});
