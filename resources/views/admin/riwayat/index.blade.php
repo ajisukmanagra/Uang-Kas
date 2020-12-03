@@ -8,7 +8,7 @@
     </div>
 
     <div class="row clearfix">
-        <div class="col-sm-12">
+        <div class="col-12">
             <div class="card">
                 <div class="header">
                     <h2>

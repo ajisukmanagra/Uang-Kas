@@ -156,7 +156,7 @@
                             <span>Pesan</span>
                         </a>
                     </li>
-                    <li class="@yield('pesan')">
+                    <li class="@yield('multimedia')">
                         <a href="/admin/multimedia">
                             <i class="material-icons">videocam</i>
                             <span>Multimedia</span>

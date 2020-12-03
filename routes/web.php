@@ -34,11 +34,11 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function () {
 
     // Rute User / Bendahara
     Route::get('/get_data_user/{id}', 'AdminController@get_data_user');
-    Route::get('', 'AdminController@user')->name('user');
-    Route::get('/show/{id}', 'AdminController@user_show')->name('user.show');
-    Route::post('/store', 'AdminController@user_store')->name('user.store');
-    Route::put('/update/{id}', 'AdminController@user_update')->name('user.update');
-    Route::get('/delete/{id}', 'AdminController@user_delete')->name('user.delete');
+    Route::get('/user', 'AdminController@user')->name('user');
+    Route::get('/user/show/{id}', 'AdminController@user_show')->name('user.show');
+    Route::post('/user/store', 'AdminController@user_store')->name('user.store');
+    Route::put('/user/update/{id}', 'AdminController@user_update')->name('user.update');
+    Route::get('/user/delete/{id}', 'AdminController@user_delete')->name('user.delete');
 
     // Rute Siswa
     // Route::get('/get_data_siswa/{id}', 'AdminController@get_data_siswa');

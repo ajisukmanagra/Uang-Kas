@@ -9,7 +9,7 @@
     </div>
 
     <div class="row clearfix">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-12">
             <div class="card">
                 <div class="header">
                     <h2>
@@ -42,14 +42,14 @@
                                 <tr>
                                     <td class="text-center"></td>
                                     <td>
-                                        <a href="#" data-id="{{ $u->id }}" class="button-show" data-toggle="modal" data-target="#modalShow">
+                                        <a href="/admin/user/show/{{ $u->id }}">
                                             {{ $u->name }}
                                         </a>
                                     </td>
                                     <td>{{ $u->kelas }}</td>
                                     <td>{{ \Carbon\Carbon::parse($u->created_at)->translatedFormat('d F Y') }}</td>
                                     <td class="text-center">
-                                        <button type="button" class="button-show btn btn-xs btn-primary waves-effect" data-id="{{ $u->id }}">
+                                        <button type="button" class="button-show btn btn-xs btn-primary waves-effect" data-id="{{ $u->id }}" data-toggle="modal" data-target="#modalShow">
                                             <i class="material-icons">visibility</i>
                                         </button>
 
@@ -212,7 +212,7 @@
 <script>
     $('.button-show').on('click', function() {
         $('#modal').modal('toggle');
-        var id = $(this).attr('data-id');
+        var id = $(this).attr("data-id");
         var url = "/admin/get_data_user/" + id;
         $.ajax({
             url: url,
@@ -292,12 +292,12 @@
             });
     });
 
-    $('.button-show').click(function() {
-        var id = $(this).attr("data-id");
-        var url = "/admin/user/show/" + id;
-        console.log(url);
-        window.location.href = url;
-    });
+    // $('.button-show').click(function() {
+    //     var id = $(this).attr("data-id");
+    //     var url = "/admin/user/show/" + id;
+    //     console.log(url);
+    //     window.location.href = url;
+    // });
 
     $("#save_user").on('click', function() {
         var error_name = $("#name_user").val();

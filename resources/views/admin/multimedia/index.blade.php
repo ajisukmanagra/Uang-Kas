@@ -1,5 +1,5 @@
 @extends('layouts/admin')
-
+@section('multimedia', 'active')
 @section('content')
 
 <div class="container-fluid">
