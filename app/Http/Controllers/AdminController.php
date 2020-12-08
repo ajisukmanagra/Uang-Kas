@@ -349,6 +349,11 @@ class AdminController extends Controller
             'video' => $exp[1],
         ]);
 
+        Riwayat::create([
+            'users_id' => Auth::user()->id,
+            'riwayat' => 'Menambah multimedia',
+        ]);
+
         return redirect('/admin/multimedia');
     }
 

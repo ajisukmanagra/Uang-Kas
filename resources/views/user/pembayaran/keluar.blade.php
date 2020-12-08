@@ -28,7 +28,7 @@
                     <tr>
                         <th style="width: 20px;">#</th>
                         <th>Keluar</th>
-                        <th>Keterangan</th>
+                        <th style="width: 550px;">Keterangan</th>
                         <th>Tanggal</th>
                         <th>Bukti/Foto</th>
                         <!-- <th>Aksi</th> -->
@@ -48,12 +48,12 @@
                     @foreach($keluar as $key => $m)
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>Rp. {{ number_format($m->bayar, 0, ',', '.') }}</td>
+                        <td>Rp.{{ number_format($m->bayar, 0, ',', '.') }}</td>
                         <td>{{ $m->ket }}</td>
-                        <td>{{ \Carbon\Carbon::parse($m->created_at)->translatedFormat('d F Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($m->created_at)->translatedFormat('d/M/Y') }}</td>
                         <td>
                             <a href="/img/bukti/{{ $m->bukti }}">
-                                <img src="{{ asset('img/bukti/'.$m->bukti) }}" width="100%">
+                                <img src="{{ asset('img/bukti/'.$m->bukti) }}" class="image">
                             </a>
                         </td>
                         <td>
@@ -139,6 +139,18 @@
 
     .container h4 {
         margin-bottom: 35px;
+    }
+
+    .image {
+        width: 100px;
+        height: 100px;
+    }
+
+    @media(max-width: 670px) {
+        .image {
+            width: 100%;
+            height: 50px;
+        }
     }
 </style>
 @endsection

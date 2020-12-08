@@ -45,7 +45,7 @@
                     @foreach($riwayat as $r)
                     <tr>
                         <?php $date = $r->created_at; ?>
-                        <td>{{ $date->locale('id')->isoFormat('dddd, MMMM YYYY - HH:mm') }}</td>
+                        <td>{{ $date->locale('id')->isoFormat('dddd, MMMM Y - HH:mm') }}</td>
                         <td>{{ $r->riwayat }}</td>
                     </tr>
                     @endforeach

@@ -36,13 +36,14 @@
         <hr>
 
         <div class="row">
-            <div class="col-8">
-                Nama Pencetak : {{ Auth::user()->name }}
+            <div class="col-7">
+                Nama Pencetak &nbsp; : {{ Auth::user()->name }} <br>
+                Nama Siswa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <b>{{ $siswa->nama_siswa }}</b>
             </div>
 
-            <div class="col-4 float-right">
-                <span>Tanggal &nbsp; : {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</span>
-                <span>Kelas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{ Auth::user()->kelas }}</span>
+            <div class="col-5 float-right">
+                <span class="float-right">Tanggal Cetak &nbsp; : {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</span> <br>
+                <span class=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kelas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{ Auth::user()->kelas }}</span>
             </div>
         </div>
 
@@ -52,7 +53,6 @@
             <thead>
                 <tr>
                     <th style="width: 20px;">No</th>
-                    <th>Nama Siswa</th>
                     <th>Tanggal Bayar</th>
                     <th>Nominal</th>
                 </tr>
@@ -62,13 +62,12 @@
                 @foreach($kas_masuk as $k)
                 <tr>
                     <td class="text-center">{{ $i ++ }}</td>
-                    <td>{{ $k->nama_siswa }}</td>
                     <td>{{ \Carbon\Carbon::parse($k->created_at)->translatedFormat('d F Y') }}</td>
                     <td>Rp {{ number_format($k->bayar, 0, ',', '.') }}</td>
                 </tr>
                 @endforeach
                 <tr>
-                    <td colspan="3" class="text-center">Nominal Masuk</td>
+                    <td colspan="2" class="text-center">Nominal Masuk</td>
                     <td>Rp {{ number_format($kas_masuk->sum('bayar'), 0, ',', '.') }}</td>
                 </tr>
             </tbody>

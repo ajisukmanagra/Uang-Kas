@@ -119,7 +119,7 @@ class BendaharaController extends Controller
     // Riwayat
     public function riwayat()
     {
-        $riwayat = Riwayat::where('users_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(10);
+        $riwayat = Riwayat::where('users_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(50);
         return view('user/riwayat/index', compact('riwayat'));
     }
 
@@ -191,7 +191,8 @@ class BendaharaController extends Controller
             ->select('kas_masuk.*', 'siswa.nama_siswa')
             ->where('kas_masuk.users_id', $auth)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(20);
+        // ->get();
 
         return view('user/pembayaran/masuk', compact('masuk'));
     }
@@ -253,12 +254,13 @@ class BendaharaController extends Controller
             ->select('kas_masuk.*', 'siswa.nama_siswa')
             ->get();
         set_time_limit(300);
-        $pdf = PDF::loadview('user/pembayaran/kas-masuk-pdf', compact('kas_masuk'))->setPaper('A4', 'potrait');;
+        $pdf = PDF::loadview('user/pembayaran/kas-masuk-pdf', compact('kas_masuk'))->setPaper('A4', 'potrait');
         return $pdf->stream();
     }
 
     public function cetak_kas_masuk_siswa($id)
     {
+        $siswa = Siswa::find($id);
         $kas_masuk = DB::table('kas_masuk')
             ->where('kas_masuk.users_id', Auth::user()->id)
             ->where('kas_masuk.siswa_id', $id)
@@ -266,7 +268,7 @@ class BendaharaController extends Controller
             ->select('kas_masuk.*', 'siswa.nama_siswa')
             ->get();
         set_time_limit(300);
-        $pdf = PDF::loadview('user/pembayaran/kas-masuk-siswa-pdf', compact('kas_masuk'))->setPaper('A4', 'potrait');;
+        $pdf = PDF::loadview('user/pembayaran/kas-masuk-siswa-pdf', compact('kas_masuk', 'siswa'))->setPaper('A4', 'potrait');;
         return $pdf->stream();
         // return $kas_masuk;
     }
@@ -311,5 +313,11 @@ class BendaharaController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function get_data_pesan($id)
+    {
+        $pesan = Pesan::find($id);
+        return $pesan;
     }
 }

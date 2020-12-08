@@ -12,13 +12,11 @@
     </nav>
 
     <div class="container">
-        <button class="btn btn-sm btn-primary float-right mb-2" id="button-create" data-toggle="modal"
-            data-target="#modalCreate">
+        <button class="btn btn-sm btn-primary float-right mb-2" id="button-create" data-toggle="modal" data-target="#modalCreate">
             <span class="fa fa-paper-plane"></span> Kirim Pesan
         </button>
 
-        <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -51,8 +49,7 @@
                                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
                                 <label class="col-12 col-form-label text-md-left">Isi Pesan anda disini.</label>
                                 <div class="col-12">
-                                    <textarea name="isi" id="isi" cols="30" rows="5" class="form-control"
-                                        required></textarea>
+                                    <textarea name="isi" id="isi" cols="30" rows="5" class="form-control" required></textarea>
                                 </div>
                             </div>
 
@@ -62,6 +59,22 @@
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalShow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="title">Isi Pesan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <span id="isi_pesan"></span>
                     </div>
                 </div>
             </div>
@@ -91,13 +104,12 @@
                     <tr>
                         <td>{{ \Carbon\Carbon::parse($p->created_at)->translatedFormat('d F Y') }}</td>
                         <td>
-                            <button tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover"
-                                data-trigger="focus" data-content="{{ $p->isi }}"><span
-                                    class="fa fa-info fa-sm"></span></button>
+                            <button class="btn btn-sm btn-primary button-show" data-toggle="modal" data-target="#modalShow" data-id="{{ $p->id }}">
+                                <span class="fa fa-info"></span>
+                            </button>
                         </td>
                         <td>
-                            @if($p->status == "true")
-                            <span class="badge badge-success">Dilihat</span>
+                            @if($p->status == "true") <span class="badge badge-success">Dilihat</span>
                             @else
                             <span class="badge badge-warning">Belum dilihat</span>
                             @endif
@@ -136,7 +148,6 @@
     .container h4 {
         margin-bottom: 35px;
     }
-
 </style>
 @endsection
 
@@ -144,9 +155,18 @@
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/sweetalert.min.js') }}"></script>
 <script>
-    $(function () {
-        $('[data-toggle="popover"]').popover()
+    $('.button-show').on('click', function() {
+        $('#modal').modal('toggle');
+        var id = $(this).attr("data-id");
+        var url = "/user/get_data_pesan/" + id;
+        $.ajax({
+            url: url,
+            cache: false,
+            success: function(result) {
+                console.log(result)
+                $('#isi_pesan').html(result.isi);
+            }
+        })
     })
-
 </script>
 @endsection

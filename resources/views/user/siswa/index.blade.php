@@ -33,7 +33,7 @@
                 <tbody>
                     @if(count($siswa) == 0)
                     <tr>
-                        <td colspan="4">
+                        <td colspan="5">
                             <img src="{{ asset('img/asset/3024051.jpg') }}" alt="" width="100%">
                             <div class="alert alert-info text-center">
                                 Belum ada data!
@@ -46,7 +46,7 @@
                         <td class="text-center">{{ $key + 1 }}</td>
                         <td>{{ $s->nama_siswa }}</td>
                         <td> {{ $s->jk == 'L' ? "Laki Laki" : "Perempuan" }} </td>
-                        <td>{{ \Carbon\Carbon::parse($s->tanggal_lahir)->translatedFormat('d F') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($s->tanggal_lahir)->translatedFormat('d/M/Y') }}</td>
                         <!-- <td>
                             <button tabindex="0" type="button" class="btn btn-primary btn-sm" data-container="body" data-toggle="popover" title="JK | Tanggal Lahir" data-trigger="focus" data-placement="top" data-content="
                                     @if($s->jk == 'L') Laki Laki
@@ -175,7 +175,7 @@
         var error_nama = $("#nama_siswa").val();
         var error_tgl = $("#tanggal_alhir").val();
 
-        if (error_nama.length <= 2) {
+        if (error_nama.length < 2) {
             swal({
                 title: "Error",
                 text: "Nama minimal berisi 2 karakter",

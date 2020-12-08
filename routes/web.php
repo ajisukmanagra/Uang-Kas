@@ -110,4 +110,5 @@ Route::group(['prefix' => 'user',  'middleware' => 'bendahara'], function () {
     Route::get('/pesan', 'BendaharaController@pesan');
     Route::get('/pesan/create', 'BendaharaController@pesan_create');
     Route::post('/pesan/store', 'BendaharaController@pesan_store');
+    Route::get('/get_data_pesan/{id}', 'BendaharaController@get_data_pesan');
 });
